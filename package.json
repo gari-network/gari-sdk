@@ -1,0 +1,23 @@
+{
+  "name": "gari-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gari",
+    "sdk"
+  ],
+  "author": "web3-gari <akshay.pisal@codeb.online>",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/web3.js": "^1.66.2",
+    "@web3auth/base": "^3.0.4",
+    "@web3auth/core": "^3.0.4",
+    "@web3auth/openlogin-adapter": "^3.0.4",
+    "@web3auth/solana-provider": "^3.0.4",
+    "axios": "^1.1.3"
+  }
+}
