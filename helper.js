@@ -86,7 +86,6 @@ async function initialize(token) {
         return { publicKey, privateKey };
     } catch (error) {
         console.error("Error Initialization ==> ", error);
-        web3auth.clearCache()
         throw error;
     }
 };

@@ -4,7 +4,7 @@ const { sdkValidate } = require('./sdkInitialize')
 /**
  * 
  * @param {string} publicKey - user publickey which we will give airdrop rewards 
- * @param {string} balance - amount of airdrop reward to user
+ * @param {string} airdropAmount - amount of airdrop reward to user
  * @param {string} token - jwt token for user information
  * @returns 
  */

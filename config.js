@@ -25,6 +25,14 @@ function setConfig(clientId, environment = 'devnet') {
             config.RPCTARGET = 'https://old-fragrant-cherry.solana-mainnet.quiknode.pro/7dea43c300949ef871b6a44d58fa0e3cbdedd332/'
             break;
 
+        case 'devnet':
+            // update config with prod details
+            config.CHAIN_ID = '0x3'
+            config.BLOCKEXPLORER = "https://explorer.solana.com/?cluster=devnet"
+            config.GARI_URL = ''
+            config.RPCTARGET = 'https://damp-long-fog.solana-devnet.quiknode.pro/0d4914481d7110a0b5bc43d3a4070a684033e733/'
+            break;
+
         default:
             break;
     }
