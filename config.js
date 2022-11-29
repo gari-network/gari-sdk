@@ -14,8 +14,9 @@ let config = {
     VERIFIER_DOMAIN: "https://gari-sdk.vercel.app/"
 }
 
-function setConfig(clientId, environment = 'devnet') {
+function setConfig(clientId, secretKey, environment = 'devnet') {
     config.gariClientId = clientId
+    config.secretKey = secretKey
     switch (environment) {
         case 'mainnet':
             // update config with prod details
