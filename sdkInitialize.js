@@ -6,7 +6,7 @@ const envConfig = require('./config.js')
  */
 function sdkInitialize(gariClientId, gariSecretKey) {
     envConfig.setConfig(gariClientId)
-
+    envConfig.setConfig(gariSecretKey)
 }
 
 function sdkValidate(type) {

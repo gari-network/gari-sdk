@@ -2,7 +2,7 @@
 let config = {
     gariClientId: "",
     secretKey: '',
-    GARI_URL: 'http://localhost:5001',
+    GARI_URL: 'https://dev-gari-sdk-backend.chingari.io/',
     CLIENT_ID: "BO12qnqLP_vnsd3iCcH7sU3GGqYmOGr_1IgDno3t35KjWFZcdk7HIPeGGJINB4DKyvsX3YZeFdjwSbCUItLJI3U",
     RPCTARGET: "https://api.devnet.solana.com/",
     BLOCKEXPLORER: "https://explorer.solana.com/?cluster=devnet",
@@ -29,7 +29,7 @@ function setConfig(clientId, environment = 'devnet') {
             // update config with prod details
             config.CHAIN_ID = '0x3'
             config.BLOCKEXPLORER = "https://explorer.solana.com/?cluster=devnet"
-            config.GARI_URL = ''
+            config.GARI_URL = 'https://dev-gari-sdk-backend.chingari.io/'
             config.RPCTARGET = 'https://damp-long-fog.solana-devnet.quiknode.pro/0d4914481d7110a0b5bc43d3a4070a684033e733/'
             break;
 
