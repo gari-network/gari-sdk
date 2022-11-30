@@ -18,13 +18,13 @@ Infra service for easy migration to Web3
 ### Installation
 
 ```shell
-npm install gari
+npm install --save gari
 ```
 
 ```js
 import * as gari from 'gari'
 ```
-
+## Frontend Mtehods
 ### Initialize gari library
 ```js
 gari.initialize(clientId:string,secerateKey:string)
@@ -59,6 +59,7 @@ transaction:’base64 Encoded Tranaction’
 }
 ```
 
+## Backend Mtehods
 ### airdrop
 this method will give specific gari amount to users as a rewards, this method will use in backend service 
 only
@@ -89,7 +90,7 @@ siganature:'asas'
 ```
 
 ### getTransactions
-this method will give all transactions of clients
+this method will give all transactions of clients. this method will use in backend service only
 
 ```js
 gari.getTransactions(filter:object,skip:number,limit:number)
@@ -114,7 +115,8 @@ date:Date
 ```
 
 ### getTransactionById
-this method will return only transaction by their id
+this method will return only transaction by their id. this method will use in backend service only
+
 
 ```js
 gari.getTransactionById(id:string)
@@ -130,6 +132,5 @@ date:Date
 }
 ```
 
-
 ## 🌐 Demo
-Checkout the [gari Demo]() to see how gari can be used in your application.
+Checkout the [gari Demo](https://gari-sdk-front-end.vercel.app/) to see how gari can be used in your application.
