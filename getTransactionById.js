@@ -5,7 +5,6 @@ const { sdkValidate } = require('./sdkInitialize')
 /**
  * 
  * @param {string} transactionId - id of the transaction 
- * @param {string} gariClientId - gariClientId of the app
  * @param {string} token - jwt token for user information
  * @returns 
  */

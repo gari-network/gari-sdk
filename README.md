@@ -18,16 +18,21 @@ Infra service for easy migration to Web3
 ### Installation
 
 ```shell
-npm install --save gari
+npm install --save gari-sdk
 ```
 
 ```js
 import * as gari from 'gari'
 ```
-## Frontend Mtehods
+## Frontend Methods
 ### Initialize gari library
 ```js
-gari.initialize(clientId:string,secerateKey:string)
+/**
+ * @description if using in backend, need to pass gariSecretKey
+ * @param {string} clientId 
+ * @param {string?} gariSecretKey 
+ */
+gari.sdkInitialize(clientId)
 ```
 
 ### createWalletOrGetWallet
@@ -39,7 +44,11 @@ Token format supported:
 Note: web3 auth popup will come first time for user while wallet creation, from next time this function will directly return data
 
 ```js
-gari.createWalletOrGetWallet(token:string)
+/**
+ * 
+ * @param {string} token
+ */
+gari.createWalletOrGetWallet(token)
  
 return {
 publicKey:’sample publickey’,
@@ -51,41 +60,69 @@ balance:0
 Send token from user to another user. This method will return encoded transaction which client has to send to its backend for validation and its backend will forward it to chingari for processing.
 
 ```js
-gari.getSendTokenTransaction(token:string,toPublicKey:string, amount:lamports)
+/**
+ * 
+ * @param {string} token
+ * @param {string} toPublicKey
+ * @param {number} amount
+ * @returns 
+ */
+gari.transferGariToken(token,toPublicKey, amount)
 
-return :
+return
 {
 transaction:’base64 Encoded Tranaction’
 }
 ```
 
-## Backend Mtehods
+## Backend Methods
+
+### Initialize gari library
+```js
+/**
+ * @description if using in backend, need to pass gariSecretKey
+ * @param {string} clientId 
+ * @param {string?} secerateKey 
+ */
+gari.sdkInitialize(clientId,secerateKey)
+```
+
 ### airdrop
-this method will give specific gari amount to users as a rewards, this method will use in backend service 
-only
+this method will give specific gari amount to users as a rewards, this method will use in backend service only
 
 ```js
-gari.airdrop(publicKey:string,amount:number[lambports],privateKey:string[of backend application, eg: ludo])
+/**
+ * 
+ * @param {string} publicKey 
+ * @param {number} amount 
+ * @param {string} token 
+ * @returns 
+ */
+gari.airdrop(publicKey,amount,token)
 
-Return sample:
+return
 {
 id:’’,
-signature:’asas’,
+signature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVm',
 status:’draft|pending|success|failed’,
 message:’’
 }
 ```
 
-### startTransaction 
-This method is helper function to do validation on transaction before sending it to chingari to process
-this method will use in backend service only
+### initiateTransaction 
+This method will validate transaction details and return siganture that will pass to blockchain
 
 ```js
-gari.getDetailsFromEncodedTransaction(encodedTransaction:string)
+/**
+ * 
+ * @param {string} encodedTransaction 
+ * @param {string} token 
+ */
+gari.initiateTransaction(encodedTransaction,token)
 
 return 
 {
-siganature:'asas'
+siganature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVm'
 }
 ```
 
@@ -93,20 +130,29 @@ siganature:'asas'
 this method will give all transactions of clients. this method will use in backend service only
 
 ```js
-gari.getTransactions(filter:object,skip:number,limit:number)
+/**
+ * 
+ * @param {object} filter 
+ * @param {number} skip 
+ * @param {number} limit 
+ * @param {string} sorting 
+ * @param {string} token 
+ * @returns 
+ */
+gari.getTransactions(filter,skip,limit,sorting,token)
 
 filter
-[{
+{
 fromPublicKey:’’,
 toPublicKey:’’,
 Status:’’,
 case:’’
-}]
+}
 
 return
 [{
 id:’’,
-signature:’asas’,
+signature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVm',
 status:’draft|pending|success|failed’,
 amount:number,
 meta:string,
@@ -119,12 +165,18 @@ this method will return only transaction by their id. this method will use in ba
 
 
 ```js
-gari.getTransactionById(id:string)
+/**
+ * 
+ * @param {string} transactionId 
+ * @param {string} token
+ * @returns 
+ */
+gari.getTransactionById(transactionId,token)
 
 return
 {
 id:’’,
-signature:’asas’,
+signature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVm',
 status:’draft|pending|success|failed’,
 amount:number,
 meta:string,

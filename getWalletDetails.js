@@ -26,13 +26,15 @@ async function createWalletOrGetWallet(token) {
         // userwallet details not found. now create new user wallet using web3auth 
         // initialize function initializes web3auth config and attach openlogin adapter
         // initialize function receives users JwtToken and creates public-private keypair     
-        const newUserWeb3Login = await initialize(token);
-        const { publicKey } = newUserWeb3Login;
+        if (!response.userExist) {
+            const newUserWeb3Login = await initialize(token);
+            const { publicKey } = newUserWeb3Login;
 
-        // will call creatwallet api from chingariSdkBackend and create user wallet using publickey without its tokenAssociatedAccount
-        const { data } = await createWallet(publicKey, token)
-        const balance = data.newWalletData.balance;
-        return { publicKey, balance };
+            // will call creatwallet api from chingariSdkBackend and create user wallet using publickey without its tokenAssociatedAccount
+            const { data } = await createWallet(publicKey, token)
+            const balance = data.newWalletData.balance;
+            return { publicKey, balance };
+        }
     } catch (error) {
         console.log('error', error)
         throw Error(error)

@@ -5,10 +5,9 @@ const { sdkValidate } = require('./sdkInitialize')
  * 
  * @param {string} encodedTransaction - base64 string of transaction information
  * @param {string} token - jwt token for user information
- * @param {string} gariClientId - gariClientId of the app
  * @returns 
  */
-async function startTransaction(encodedTransaction, token) {
+async function initiateTransaction(encodedTransaction, token) {
     try {
         const validate = sdkValidate(`backend`)
         if (!validate) {
@@ -21,4 +20,4 @@ async function startTransaction(encodedTransaction, token) {
         throw Error(error)
     }
 }
-module.exports = startTransaction
+module.exports = initiateTransaction

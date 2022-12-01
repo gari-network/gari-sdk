@@ -2,7 +2,7 @@ const getTransactionsByID = require('./getTransactionById.js')
 const getTransactions = require('./getTransactions.js')
 const createWalletOrGetWallet = require('./getWalletDetails.js')
 const airDrop = require('./getAirdrop.js')
-const startTransaction = require('./startTransaction.js')
+const initiateTransaction = require('./startTransaction.js')
 const transferGariToken = require('./transferGariToken.js')
 const { sdkInitialize } = require('./sdkInitialize.js')
 
@@ -12,7 +12,7 @@ module.exports = {
 
     // backend methods
     airDrop,
-    startTransaction,
+    initiateTransaction,
     getTransactionsByID,
     getTransactions,
 

@@ -8,7 +8,6 @@ const { getDecodedTransction, partialSign } = require('./gariHelper')
  * @param {string} token - jwt token for user information
  * @param {string} receiverPublicKey - receiver publickey for transaction
  * @param {string} coins - amount to be transfer(in lamports)
- * @param {string} GariClientId - gariClientId of the app
  * @returns 
  */
 async function transferGariToken(token, receiverPublicKey, coins) {
