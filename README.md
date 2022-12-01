@@ -82,8 +82,7 @@ gari.sdkInitialize(clientId,secerateKey)
 ```
 
 ### airdrop
-this method will give specific gari amount to users as a rewards, this method will use in backend service only
-
+this method will give specific gari amount to users as a rewards. 
 ```js
 /**
  * @param {string} publicKey 
@@ -103,7 +102,7 @@ message:’’
 ```
 
 ### initiateTransaction 
-This method will validate transaction details and return siganture that will pass to blockchain
+This method will validate transaction details and return siganture that will pass to blockchain.
 
 ```js
 /**
@@ -119,7 +118,7 @@ siganature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi
 ```
 
 ### getTransactions
-this method will give all transactions of clients. this method will use in backend service only
+this method will give all transactions of clients. 
 
 ```js
 /**
@@ -152,7 +151,7 @@ date:Date
 ```
 
 ### getTransactionById
-this method will return only transaction by their id. this method will use in backend service only
+this method will return only transaction by their id.
 
 
 ```js
