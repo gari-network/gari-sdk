@@ -5,10 +5,7 @@ Infra service for easy migration to Web3
 
 - Create a wallet for a user
 - Get wallet details and balance for a particular user
-- Poll for wallet creation success
 - Send tokens from one wallet to another
-- Get instructions in an encoded format and a helper function to decode the same
-- Poll for transaction success
 - Get transaction history by wallet pub key
 - Get transaction details by txn id
 - Client can Airdrop tokens to multiple users
@@ -28,9 +25,8 @@ import * as gari from 'gari'
 ### Initialize gari library
 ```js
 /**
- * @description if using in backend, need to pass gariSecretKey
+ * @description 
  * @param {string} clientId 
- * @param {string?} gariSecretKey 
  */
 gari.sdkInitialize(clientId)
 ```
@@ -45,7 +41,6 @@ Note: web3 auth popup will come first time for user while wallet creation, from 
 
 ```js
 /**
- * 
  * @param {string} token
  */
 gari.createWalletOrGetWallet(token)
@@ -61,7 +56,6 @@ Send token from user to another user. This method will return encoded transactio
 
 ```js
 /**
- * 
  * @param {string} token
  * @param {string} toPublicKey
  * @param {number} amount
@@ -92,7 +86,6 @@ this method will give specific gari amount to users as a rewards, this method wi
 
 ```js
 /**
- * 
  * @param {string} publicKey 
  * @param {number} amount 
  * @param {string} token 
@@ -114,7 +107,6 @@ This method will validate transaction details and return siganture that will pas
 
 ```js
 /**
- * 
  * @param {string} encodedTransaction 
  * @param {string} token 
  */
@@ -131,7 +123,6 @@ this method will give all transactions of clients. this method will use in backe
 
 ```js
 /**
- * 
  * @param {object} filter 
  * @param {number} skip 
  * @param {number} limit 
@@ -166,7 +157,6 @@ this method will return only transaction by their id. this method will use in ba
 
 ```js
 /**
- * 
  * @param {string} transactionId 
  * @param {string} token
  * @returns 
