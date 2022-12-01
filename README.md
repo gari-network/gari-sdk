@@ -15,7 +15,7 @@ Infra service for easy migration to Web3
 ### Installation
 
 ```shell
-npm install --save gari-sdk
+npm install --save gari
 ```
 
 ```js
