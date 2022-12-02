@@ -32,5 +32,19 @@ function partialSign(transactionDetails, privateKey) {
     return wireTransaction.toString('base64');
 }
 
-module.exports = { partialSign, getDecodedTransction }
+function clientPartialSign(transactionDetails, privateKey) {
+    // first we will partialsign on transaction using senders(ludo user) privatekey
+    const fromWallet = web3.Keypair.fromSecretKey(Buffer.from(privateKey))
+
+    transactionDetails.partialSign(...[fromWallet]);
+
+    const wireTransaction = transactionDetails.serialize({
+        requireAllSignatures: true,
+        verifySignatures: false,
+    });
+
+    return wireTransaction.toString('base64');
+}
+
+module.exports = { partialSign, getDecodedTransction, clientPartialSign }
 

@@ -90,9 +90,9 @@ function getEncodeTransactionInstruction(airdropData, token) {
  * @param {string} token - jwt token for user information
  * @returns 
  */
-function getAirdrop(data, encodedTransaction, token) {
+function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/airdrop`, { data, encodedTransaction }, {
+    return axios.post(`${GARI_URL}Appwallet/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
         headers: {
             token,
             gariClientId

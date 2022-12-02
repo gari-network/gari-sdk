@@ -1,21 +1,21 @@
 # gari-sdk
-Infra service for easy migration to Web3
+This SDK is easy-to-use wallet service that a client can use to enable their users to have
+their wallet within there application and do on-chain transactions within their app
 
 ## 💡 Features 
 
 - Create a wallet for a user
-- fetch wallet details and balance for a particular user
-- Send tokens from one wallet to another
-- fetch transaction history by wallet pub key
-- fetch transaction details by txn id
-- Client can Airdrop tokens to multiple users
+- fetch their wallet details and balance for a particular user
+- Send gari tokens from one wallet to another
+- fetch their transaction details by txn id
+- Client can Airdrop gari tokens to its users
 
 ## ⚡ Quick Start
 
 ### Installation
 
 ```shell
-npm install --save gari
+npm install gari
 ```
 
 ```js
@@ -42,12 +42,12 @@ gari.sdkInitialize(clientId)
 ```
 
 ### createWallet Or GetWallet
-Get wallet/ create wallet for user.
+Get wallet or create wallet for user.
 
 Token format supported:
 [here](https://web3auth.io/docs/custom-authentication/byo-jwt-providers)
 
-Note: web3 auth popup will come first time for user while wallet creation, from next time this function will directly return data
+Note: web3 auth popup will occur initiale for user during wallet creation, next time this function will directly return data
 
 ```js
 /**
@@ -62,7 +62,7 @@ balance:0
 ```
 
 ### transferGariToken
-Send token from user to another user. This method will return encoded transaction which client has to send to its backend for validation and its backend will forward it to chingari for processing.
+Send gari token to another user. This will return encoded transaction which client has to send to its backend for validation and its backend will forward it to chingari for processing.
 
 ```js
 /**
@@ -92,15 +92,16 @@ gari.sdkInitialize(clientId,secerateKey)
 ```
 
 ### airdrop
-this method will give specific gari amount to users as a rewards. 
+client will airdrop gari tokens to its users as a reward. 
 ```js
 /**
  * @param {string} publicKey 
  * @param {number} amount 
  * @param {string} token 
+ * @param {string} fromWalletPrivateKey 
  * @returns 
  */
-gari.airdrop(publicKey,amount,token)
+gari.airdrop(publicKey,amount,token,fromWalletPrivateKey)
 
 return
 {
@@ -112,7 +113,7 @@ message:’’
 ```
 
 ### initiateTransaction 
-This method will validate transaction details and return siganture that will pass to blockchain.
+This method will validate transaction details and return signature.
 
 ```js
 /**
@@ -128,7 +129,7 @@ siganature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi
 ```
 
 ### getTransactions
-this method will give all transactions of clients. 
+this will give all client related transactions to sdk Client. 
 
 ```js
 /**
@@ -161,7 +162,7 @@ date:Date
 ```
 
 ### getTransactionById
-this method will return only transaction by their id.
+this will return specific transaction by particular id.
 
 
 ```js
