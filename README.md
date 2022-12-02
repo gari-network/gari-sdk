@@ -4,10 +4,10 @@ Infra service for easy migration to Web3
 ## 💡 Features 
 
 - Create a wallet for a user
-- Get wallet details and balance for a particular user
+- fetch wallet details and balance for a particular user
 - Send tokens from one wallet to another
-- Get transaction history by wallet pub key
-- Get transaction details by txn id
+- fetch transaction history by wallet pub key
+- fetch transaction details by txn id
 - Client can Airdrop tokens to multiple users
 
 ## ⚡ Quick Start
@@ -21,6 +21,16 @@ npm install --save gari
 ```js
 import * as gari from 'gari'
 ```
+
+### Method List
+- sdkInitialize
+- createWalletOrGetWallet
+- transferGariToken
+- airdrop
+- initiateTransaction
+- getTransactions
+- getTransactionById
+
 ## Frontend Methods
 ### Initialize gari library
 ```js
@@ -31,7 +41,7 @@ import * as gari from 'gari'
 gari.sdkInitialize(clientId)
 ```
 
-### createWalletOrGetWallet
+### createWallet Or GetWallet
 Get wallet/ create wallet for user.
 
 Token format supported:

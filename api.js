@@ -58,7 +58,7 @@ function startTransactions(encodedTransaction, token) {
     const { GARI_URL, gariClientId, secretKey } = envConfig.getConfig()
 
     // todo: dont pass secerate key, hash body with secerate and backend will try to decrypti with secerate key
-    return axios.post(`${GARI_URL}Appwallet/startTransactions`, { encodedTransaction }, {
+    return axios.post(`${GARI_URL}Appwallet/initiateTransactions`, { encodedTransaction }, {
         headers: {
             token,
             gariClientId,
@@ -69,15 +69,33 @@ function startTransactions(encodedTransaction, token) {
 
 /**
  * 
+ * @param {object} airdropData 
+ * @param {string} token 
+ * @returns 
+ */
+function getEncodeTransactionInstruction(airdropData, token) {
+    const { GARI_URL, gariClientId } = envConfig.getConfig();
+    // get encoded transaction instructions
+    return axios.post(`${GARI_URL}Appwallet/getEncodeTransactionAirdrop`, airdropData, {
+        headers: {
+            token,
+            gariClientId
+        },
+    });
+}
+
+/**
+ * 
  * @param {string} data - data has publickey and balance 
  * @param {string} token - jwt token for user information
  * @returns 
  */
-function getAirdrop(data, token) {
-    const { GARI_URL } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/airdrop`, data, {
+function getAirdrop(data, encodedTransaction, token) {
+    const { GARI_URL, gariClientId } = envConfig.getConfig()
+    return axios.post(`${GARI_URL}Appwallet/airdrop`, { data, encodedTransaction }, {
         headers: {
             token,
+            gariClientId
         }
     })
 }
@@ -114,4 +132,6 @@ function getTransaction(data, token) {
     })
 }
 
-module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodedTransaction }
+
+
+module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodedTransaction, getEncodeTransactionInstruction }

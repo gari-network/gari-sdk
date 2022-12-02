@@ -7,6 +7,7 @@ const web3 = require('@solana/web3.js')
  * @returns 
  */
 function getDecodedTransction(encodedTransction) {
+    console.log('encodedTransction=>', encodedTransction)
     let encodedTransctionInBuffer = Buffer.from(encodedTransction, 'base64'); // get encoded buffer
     return web3.Transaction.from(encodedTransctionInBuffer);
 }

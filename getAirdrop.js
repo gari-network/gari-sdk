@@ -1,24 +1,48 @@
-const { getAirdrop } = require('./api.js')
+const { getAirdrop, getEncodeTransactionInstruction } = require('./api.js')
 const { sdkValidate } = require('./sdkInitialize')
+const { getDecodedTransction, partialSign } = require('./gariHelper')
 
 /**
  * 
  * @param {string} publicKey - user publickey which we will give airdrop rewards 
  * @param {string} airdropAmount - amount of airdrop reward to user
  * @param {string} token - jwt token for user information
+ * @param {string} fromWalletPrivateKey - private key of app 
  * @returns 
  */
-async function airDrop(publicKey, airdropAmount, token) {
+async function airDrop(publicKey, airdropAmount, token, fromWalletPrivateKey) {
     try {
         const validate = sdkValidate(`backend`)
         if (!validate) {
             throw new Error(`sdk not initialized`)
         }
+
         const airDropdata = {
             publicKey, airdropAmount
         }
-        const data = await getAirdrop(airDropdata, token)
-        return data
+
+        // first get encoded transaction details in toString('base64)
+        const encodeTransactionInstruction = await getEncodeTransactionInstruction(
+            airDropdata,
+            token
+        );
+
+        console.log('encodeTransactionInstruction=>', encodeTransactionInstruction)
+
+        // decode transaction data :
+        const transactionDetailsWithoutSignatures = getDecodedTransction(
+            encodeTransactionInstruction.data.encodedTransaction
+        );
+
+        console.log('transactionDetailsWithoutSignatures=>', transactionDetailsWithoutSignatures)
+
+        // In below fn will send decodedTransation data for users partial signing
+        const partialSignedTransaction = await partialSign(transactionDetailsWithoutSignatures, fromWalletPrivateKey)
+
+        console.log('partialSignedTransaction=>', partialSignedTransaction)
+        const signature = await getAirdrop(airDropdata, partialSignedTransaction, token);
+        console.log('signature', signature)
+        return signature;
     } catch (error) {
         console.log('getting error while airDrop', error)
         throw Error(error)

@@ -1,6 +1,6 @@
 {
-  "name": "gari",
-  "version": "1.0.1",
+  "name": "gari-sdk",
+  "version": "1.0.36",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "gari",
     "sdk"
   ],
-  "author": " web3-gari <web3@gari.network>",
+  "author": " akshay pisal <akshay.pisal@codeb.online>",
   "license": "ISC",
   "respository": {
     "type": "git",

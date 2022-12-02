@@ -30,13 +30,12 @@ async function transferGariToken(token, receiverPublicKey, coins) {
         // get encodedTransactionDetails in toString("base64") format by calling SDK backend getEncodedTransaction function
         // encodedTransaction : it contains all transactions instructions(i.e sender/receiver tokenAssociatedAccount, feepayer(chingari), add recentblockhash obj)
         const encodedTransactionDetails = await getEncodedTransaction(transactionData, token)
-
+        console.log('encodedTransactionDetails', encodedTransactionDetails.data.encodedTransaction)
         // encodedTransactionDetails is in toString("base64") format, to decode data : 
-        const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data);
-
+        const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data.encodedTransaction);
         // In below fn will send decodedTransation data for users partial signing 
         const userPartialSign = partialSign(transactionDetailsWithoutSignatures, privateKey)
-
+        console.log('userPartialSign', userPartialSign)
         return { encodedTransaction: userPartialSign };
 
     } catch (error) {
