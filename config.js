@@ -24,7 +24,7 @@ function setConfig(clientId, secretKey, environment = 'devnet') {
             config.CHAIN_ID = '0x1'
             config.BLOCKEXPLORER = "https://explorer.solana.com/?cluster=mainnet"
             config.GARI_URL = ''
-            config.RPCTARGET = 'https://old-fragrant-cherry.solana-mainnet.quiknode.pro/7dea43c300949ef871b6a44d58fa0e3cbdedd332/'
+            config.RPCTARGET = 'https://old-fragrant-cherry.solana-mainnet.quiknode.pro/<getInput>/'
             break;
 
         case 'devnet':
