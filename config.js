@@ -3,7 +3,7 @@ let config = {
     gariClientId: "",
     secretKey: '',
     GARI_URL: '',
-    CLIENT_ID: "BO12qnqLP_vnsd3iCcH7sU3GGqYmOGr_1IgDno3t35KjWFZcdk7HIPeGGJINB4DKyvsX3YZeFdjwSbCUItLJI3U",
+    CLIENT_ID: "BN4hbho8CAfJYqfUC8zoZQEnUVRqAhXMmGtGYUdJWjuqpR_A-wvHChnd101kwXXSBKwVQfaHSifv7Vl9amh9Hn4",
     RPCTARGET: "https://api.devnet.solana.com/",
     BLOCKEXPLORER: "https://explorer.solana.com/?cluster=devnet",
     TICKER: "SOL",
@@ -11,7 +11,7 @@ let config = {
     TICKERNAME: "Solana Token",
     NETWORK: 'devnet',
     NAME: "Demo React POC",
-    VERIFIER_DOMAIN: "https://gari-sdk.vercel.app/"
+    VERIFIER_DOMAIN: "https://demo-gari-sdk.vercel.app/"
 }
 
 function setConfig(clientId, secretKey, environment = 'devnet') {
