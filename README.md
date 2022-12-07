@@ -185,4 +185,5 @@ date:Date
 ```
 
 ## 🌐 Demo
-Checkout the [gari Demo](https://gari-sdk-front-end.vercel.app/) to see how gari can be used in your application.
+Checkout the [gari Demo](https://demo-gari-sdk.vercel.app/) to see how gari can be used in your application.
+Demo [Source code](https://github.com/gari-network/demo-gari-sdk)
