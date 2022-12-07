@@ -1,4 +1,6 @@
 
+const {version} = require('./package.json');
+
 let config = {
     gariClientId: "",
     secretKey: '',
@@ -44,4 +46,9 @@ function getConfig() {
     return config
 }
 
-module.exports = { setConfig, getConfig }
+function packageVersion(){
+
+    return version
+}
+
+module.exports = { setConfig, getConfig, packageVersion }

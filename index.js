@@ -6,9 +6,12 @@ const initiateTransaction = require('./startTransaction.js')
 const transferGariToken = require('./transferGariToken.js')
 const { sdkInitialize } = require('./sdkInitialize.js')
 
+const {packageVersion} = require('./config.js')
+
 module.exports = {
     // backend and frontend common methods
     sdkInitialize,
+    packageVersion,
 
     // backend methods
     airDrop,
