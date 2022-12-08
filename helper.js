@@ -41,7 +41,7 @@ async function initialize(token) {
                     jwt: {
                         // take this from config
                         name: NAME,
-                        verifier: "gari-sdk",
+                        verifier: "gari-sdk-customVerifier",
                         typeOfLogin: "jwt",
                         clientId: CLIENT_ID
                     },
