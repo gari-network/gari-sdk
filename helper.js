@@ -18,7 +18,7 @@ async function initialize(token) {
     const { RPCTARGET,
         BLOCKEXPLORER,
         TICKER,
-        TICKERNAME, CLIENT_ID, CHAIN_ID, NETWORK, NAME, VERIFIER_DOMAIN } = envConfig.getConfig()
+        TICKERNAME, CLIENT_ID, CHAIN_ID, NETWORK, NAME, VERIFIER_DOMAIN, VERIFIER_NAME } = envConfig.getConfig()
     // get clientid from https://dashboard.web3auth.io
 
     try {
@@ -41,7 +41,7 @@ async function initialize(token) {
                     jwt: {
                         // take this from config
                         name: NAME,
-                        verifier: "gari-sdk-customVerifier",
+                        verifier: VERIFIER_NAME,
                         typeOfLogin: "jwt",
                         clientId: CLIENT_ID
                     },
