@@ -17,23 +17,22 @@ async function transferGariToken(token, receiverPublicKey, coins) {
             throw new Error(`sdk not initialized`)
         }
 
-        // will call web3auth initialize function for getting privateKey of sender
+        // web3auth initialize function call for getting privateKey of sender
         const againInitializeWeb3 = await initialize(token);
         const { privateKey } = againInitializeWeb3;
 
-        // receiverPublicKey & amount are the arguments passed to getEncodedTransaction function
         const transactionData = {
             receiverPublicKey,
             amount: coins
         }
 
-        // get encodedTransactionDetails in toString("base64") format by calling SDK backend getEncodedTransaction function
         // encodedTransaction : it contains all transactions instructions(i.e sender/receiver tokenAssociatedAccount, feepayer(chingari), add recentblockhash obj)
         const encodedTransactionDetails = await getEncodedTransaction(transactionData, token)
-        console.log('encodedTransactionDetails', encodedTransactionDetails.data.encodedTransaction)
+        
         // encodedTransactionDetails is in toString("base64") format, to decode data : 
         const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data.encodedTransaction);
-        // In below fn will send decodedTransation data for users partial signing 
+
+        // partial sign from sender wallet  
         const userPartialSign = partialSign(transactionDetailsWithoutSignatures, privateKey)
         console.log('userPartialSign', userPartialSign)
         return { encodedTransaction: userPartialSign };

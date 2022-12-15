@@ -14,23 +14,24 @@ async function createWalletOrGetWallet(token) {
         if (!validate) {
             throw new Error(`sdk not initialized`)
         }
-        // we will first search the user in Sdk backend 
-        // if user exist in sdk database then we will fetch and show publickey and balance of user
+   
+        // fetch user : if exist then return publickey and its gariBalance
         const { data: response } = await getWalletDetails(token)
         if (response.data) {
-            // user wallet details found in SDK backend
+            // user wallet details found 
             const publicKey = response.data.publicKey
             const balance = response.data.balance
             return { publicKey, balance }
         }
-        // userwallet details not found. now create new user wallet using web3auth 
-        // initialize function initializes web3auth config and attach openlogin adapter
-        // initialize function receives users JwtToken and creates public-private keypair     
+
+        // userwallet details not found 
+        //  web3auth generates pub/priv key pair for that userId      
         if (!response.userExist) {
             const newUserWeb3Login = await initialize(token);
             const { publicKey } = newUserWeb3Login;
 
-            // will call creatwallet api from chingariSdkBackend and create user wallet using publickey without its tokenAssociatedAccount
+            // creatwallet api 
+            // create user wallet without its tokenAssociatedAccount  // token here refers to gari token
             const { data } = await createWallet(publicKey, token)
             const balance = data.newWalletData.balance;
             return { publicKey, balance };

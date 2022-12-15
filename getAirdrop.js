@@ -32,11 +32,11 @@ async function airDrop(publicKey, airdropAmount, token, fromWalletPrivateKey) {
             encodeTransactionInstruction.data.encodedTransaction
         );
 
-        // In below fn will send decodedTransation data for users partial signing
+        // gari clients partial sign 
         const partialSignedTransaction = await partialSign(transactionDetailsWithoutSignatures, fromWalletPrivateKey)
 
-        const signature = await getAirdrop(publicKey, airdropAmount, partialSignedTransaction, token);
-        return signature;
+        const airdropResponse = await getAirdrop(publicKey, airdropAmount, partialSignedTransaction, token);
+        return airdropResponse.data.signature;
     } catch (error) {
         console.log('getting error while airDrop', error)
         throw Error(error)

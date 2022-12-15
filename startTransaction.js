@@ -13,8 +13,8 @@ async function initiateTransaction(encodedTransaction, token) {
         if (!validate) {
             throw new Error(`sdk not initialized`)
         }
-        const data = await startTransactions(encodedTransaction, token)
-        return data
+        const transactionResponse = await startTransactions(encodedTransaction, token)
+        return transactionResponse.data.signature;
     } catch (error) {
         console.log('error while transactions', error)
         throw Error(error)
