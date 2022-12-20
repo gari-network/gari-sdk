@@ -33,7 +33,7 @@ function setConfig(clientId, secretKey, environment = 'devnet') {
             // update config with prod details
             config.CHAIN_ID = '0x3'
             config.BLOCKEXPLORER = "https://explorer.solana.com/?cluster=devnet"
-            config.GARI_URL = 'https://dev-gari-sdk-backend.chingari.io/'
+            config.GARI_URL = 'https://dev-gari-sdk-backend.chingari.io'
             config.RPCTARGET = 'https://api.devnet.solana.com/'
             config.VERIFIER_NAME = "pubg-game-verifier"
             break;

@@ -1,4 +1,4 @@
-const { getEncodedTransaction } = require('./api.js')
+const { getEncodeTransaction } = require('./api.js')
 const initialize = require('./helper')
 const { sdkValidate } = require('./sdkInitialize')
 const { getDecodedTransction, partialSign } = require('./gariHelper')
@@ -27,10 +27,10 @@ async function transferGariToken(token, receiverPublicKey, coins) {
         }
 
         // encodedTransaction : it contains all transactions instructions(i.e sender/receiver tokenAssociatedAccount, feepayer(chingari), add recentblockhash obj)
-        const encodedTransactionDetails = await getEncodedTransaction(transactionData, token)
+        const encodedTransactionDetails = await getEncodeTransaction(transactionData, token)
         
         // encodedTransactionDetails is in toString("base64") format, to decode data : 
-        const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data.encodedTransaction);
+        const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data.data);
 
         // partial sign from sender wallet  
         const userPartialSign = partialSign(transactionDetailsWithoutSignatures, privateKey)

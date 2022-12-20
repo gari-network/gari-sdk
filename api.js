@@ -8,7 +8,7 @@ const envConfig = require('./config.js')
  */
 function getWalletDetails(token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.get(`${GARI_URL}Appwallet/getWalletDetails`, {
+    return axios.get(`${GARI_URL}/appwallet/get-wallet-details`, {
         headers: {
             token,
             gariClientId
@@ -24,7 +24,7 @@ function getWalletDetails(token) {
  */
 function createWallet(publicKey, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/newUserWallet`, { publicKey }, {
+    return axios.post(`${GARI_URL}/appwallet/new-user-wallet`, { publicKey }, {
         headers: {
             token,
             gariClientId
@@ -38,9 +38,9 @@ function createWallet(publicKey, token) {
  * @param {string} token - jwt token for user information
  * @returns 
  */
-function getEncodedTransaction(transactionData, token) {
+function getEncodeTransaction(transactionData, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/getEncodedTransaction`, transactionData, {
+    return axios.post(`${GARI_URL}/appwallet/get-encode-transaction`, transactionData, {
         headers: {
             token,
             gariClientId
@@ -58,7 +58,7 @@ function startTransactions(encodedTransaction, token) {
     const { GARI_URL, gariClientId, secretKey } = envConfig.getConfig()
 
     // todo: dont pass secerate key, hash body with secerate and backend will try to decrypti with secerate key
-    return axios.post(`${GARI_URL}Appwallet/initiateTransactions`, { encodedTransaction }, {
+    return axios.post(`${GARI_URL}/appwallet/initiate-transaction`, { encodedTransaction }, {
         headers: {
             token,
             gariClientId,
@@ -73,10 +73,10 @@ function startTransactions(encodedTransaction, token) {
  * @param {string} token 
  * @returns 
  */
-function getEncodeTransactionInstruction(airdropData, token) {
+function getEncodeTransactionAirdrop(airdropData, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig();
     // get encoded transaction instructions
-    return axios.post(`${GARI_URL}Appwallet/getEncodeTransactionAirdrop`, airdropData, {
+    return axios.post(`${GARI_URL}/appwallet/get-encode-transaction-airdrop`, airdropData, {
         headers: {
             token,
             gariClientId
@@ -92,7 +92,7 @@ function getEncodeTransactionInstruction(airdropData, token) {
  */
 function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
+    return axios.post(`${GARI_URL}/appwallet/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
         headers: {
             token,
             gariClientId
@@ -108,7 +108,7 @@ function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
  */
 function getTransactionByid(transactionId, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.get(`${GARI_URL}Appwallet/getTransactionById${transactionId}`, {
+    return axios.get(`${GARI_URL}/appwallet/get-transaction-by-id${transactionId}`, {
         headers: {
             token,
             gariClientId
@@ -124,7 +124,7 @@ function getTransactionByid(transactionId, token) {
  */
 function getTransaction(data, token) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}Appwallet/transactions`, data, {
+    return axios.post(`${GARI_URL}/appwallet/transactions`, data, {
         headers: {
             token,
             gariClientId
@@ -134,4 +134,4 @@ function getTransaction(data, token) {
 
 
 
-module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodedTransaction, getEncodeTransactionInstruction }
+module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodeTransaction, getEncodeTransactionAirdrop }

@@ -1,4 +1,4 @@
-const { getAirdrop, getEncodeTransactionInstruction } = require('./api.js')
+const { getAirdrop, getEncodeTransactionAirdrop } = require('./api.js')
 const { sdkValidate } = require('./sdkInitialize')
 const { getDecodedTransction, partialSign, } = require('./gariHelper')
 
@@ -22,21 +22,21 @@ async function airDrop(publicKey, airdropAmount, token, fromWalletPrivateKey) {
         }
 
         // first get encoded transaction details in toString('base64)
-        const encodeTransactionInstruction = await getEncodeTransactionInstruction(
+        const encodeTransactionInstruction = await getEncodeTransactionAirdrop(
             airDropdata,
             token
         );
 
         // decode transaction data :
         const transactionDetailsWithoutSignatures = getDecodedTransction(
-            encodeTransactionInstruction.data.encodedTransaction
+            encodeTransactionInstruction.data.data
         );
 
         // gari clients partial sign 
         const partialSignedTransaction = await partialSign(transactionDetailsWithoutSignatures, fromWalletPrivateKey)
 
         const airdropResponse = await getAirdrop(publicKey, airdropAmount, partialSignedTransaction, token);
-        return airdropResponse.data.signature;
+        return airdropResponse.data.data;
     } catch (error) {
         console.log('getting error while airDrop', error)
         throw Error(error)

@@ -16,26 +16,26 @@ async function createWalletOrGetWallet(token) {
         }
    
         // fetch user : if exist then return publickey and its gariBalance
-        const { data: response } = await getWalletDetails(token)
+        const { data: response } = await getWalletDetails(token);
         if (response.data) {
             // user wallet details found 
-            const publicKey = response.data.publicKey
-            const balance = response.data.balance
-            return { publicKey, balance }
+            if(response.data.publicKey)
+            {
+                const publicKey = response.data.publicKey
+                const balance = response.data.balance
+                return { publicKey, balance }
+            }
         }
 
         // userwallet details not found 
         //  web3auth generates pub/priv key pair for that userId      
-        if (!response.userExist) {
-            const newUserWeb3Login = await initialize(token);
-            const { publicKey } = newUserWeb3Login;
+        const newUserWeb3Login = await initialize(token);
+        const { publicKey } = newUserWeb3Login;
 
-            // creatwallet api 
-            // create user wallet without its tokenAssociatedAccount  // token here refers to gari token
-            const { data } = await createWallet(publicKey, token)
-            const balance = data.newWalletData.balance;
-            return { publicKey, balance };
-        }
+        // create user wallet without its tokenAssociatedAccount  // token here refers to gari token
+        const { data } = await createWallet(publicKey, token)
+        const balance = data.data.balance;
+        return { publicKey, balance };
     } catch (error) {
         console.log('error', error)
         throw Error(error)
