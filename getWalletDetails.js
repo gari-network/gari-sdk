@@ -16,13 +16,21 @@ async function createWalletOrGetWallet(token) {
         }
    
         // fetch user : if exist then return publickey and its gariBalance
-        const { data: response } = await getWalletDetails(token);
-        if (response.data) {
-            // user wallet details found 
-            if(response.data.publicKey)
+        // const { data: response } = await getWalletDetails(token);
+        const getWalletResponse = await getWalletDetails(token).catch((error) => {
+            console.log("error while getting wallet details   ", error);
+            if(error.response.status != 404)
             {
-                const publicKey = response.data.publicKey
-                const balance = response.data.balance
+                throw Error(error);
+            }
+            return undefined;
+        });
+        if (getWalletResponse && getWalletResponse.data) {
+            // user wallet details found 
+            if(getWalletResponse.data.data.publicKey)
+            {
+                const publicKey = getWalletResponse.data.data.publicKey
+                const balance = getWalletResponse.data.data.balance
                 return { publicKey, balance }
             }
         }
