@@ -55,14 +55,13 @@ function getEncodeTransaction(transactionData, token) {
  * @returns 
  */
 function startTransactions(encodedTransaction, token) {
-    const { GARI_URL, gariClientId, secretKey } = envConfig.getConfig()
+    const { GARI_URL, gariClientId } = envConfig.getConfig()
 
     // todo: dont pass secerate key, hash body with secerate and backend will try to decrypti with secerate key
     return axios.post(`${GARI_URL}/appwallet/initiate-transaction`, { encodedTransaction }, {
         headers: {
             token,
             gariClientId,
-            secretKey
         }
     })
 }
@@ -74,12 +73,12 @@ function startTransactions(encodedTransaction, token) {
  * @returns 
  */
 function getEncodeTransactionAirdrop(airdropData, token) {
-    const { GARI_URL, gariClientId } = envConfig.getConfig();
+    const { GARI_URL, secretKey } = envConfig.getConfig();
     // get encoded transaction instructions
-    return axios.post(`${GARI_URL}/appwallet/get-encode-transaction-airdrop`, airdropData, {
+    return axios.post(`${GARI_URL}/admin/get-encode-transaction-airdrop`, airdropData, {
         headers: {
             token,
-            gariClientId
+            secretKey
         },
     });
 }
@@ -91,11 +90,11 @@ function getEncodeTransactionAirdrop(airdropData, token) {
  * @returns 
  */
 function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
-    const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}/appwallet/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
+    const { GARI_URL, secretKey } = envConfig.getConfig()
+    return axios.post(`${GARI_URL}/admin/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
         headers: {
             token,
-            gariClientId
+            secretKey
         }
     })
 }
@@ -123,11 +122,11 @@ function getTransactionByid(transactionId, token) {
  * @returns 
  */
 function getTransaction(data, token) {
-    const { GARI_URL, gariClientId } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}/appwallet/transactions`, data, {
+    const { GARI_URL, secretKey } = envConfig.getConfig()
+    return axios.post(`${GARI_URL}/admin/transactions`, data, {
         headers: {
             token,
-            gariClientId
+            secretKey
         }
     })
 }

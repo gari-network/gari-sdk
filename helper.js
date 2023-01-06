@@ -15,7 +15,7 @@ let privateKey
  * @returns 
  */
 async function initialize(token) {
-    const { RPCTARGET,
+    const {
         BLOCKEXPLORER,
         TICKER,
         TICKERNAME, CLIENT_ID, CHAIN_ID, NETWORK, NAME, VERIFIER_DOMAIN, VERIFIER_NAME } = envConfig.getConfig()
@@ -27,7 +27,6 @@ async function initialize(token) {
             chainConfig: {
                 chainNamespace: CHAIN_NAMESPACES.SOLANA,
                 chainId: CHAIN_ID,
-                rpcTarget: RPCTARGET,
                 blockExplorer: BLOCKEXPLORER,
                 ticker: TICKER,
                 tickerName: TICKERNAME,

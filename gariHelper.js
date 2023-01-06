@@ -14,7 +14,7 @@ function getDecodedTransction(encodedTransction) {
 /**
  * 
  * @param {string} transactionDetails - base64 string of transaction
- * @param {string} privateKey - privateKey of user
+ * @param {string} privateKey - privateKey of user : it should be in hex format 
  * @returns 
  */
 function partialSign(transactionDetails, privateKey) {
