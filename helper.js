@@ -45,6 +45,13 @@ async function initialize(token) {
                         clientId: CLIENT_ID
                     },
                 },
+                whiteLabel: {
+                    name: "Circle-Of-Games",
+                    logoLight : "https://as2.ftcdn.net/v2/jpg/04/26/52/83/1000_F_426528320_wRec6AsJNDTuT6AmwYspF6C7eqYZLC17.jpg",
+                    logoDark : "https://as2.ftcdn.net/v2/jpg/04/26/52/83/1000_F_426528320_wRec6AsJNDTuT6AmwYspF6C7eqYZLC17.jpg",
+                    defaultLanguage: "en",
+                    dark: true, 
+                },
             },
         });
         web3auth.configureAdapter(adapter);
