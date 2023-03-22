@@ -1,6 +1,6 @@
 # gari-sdk
-This SDK is easy-to-use wallet service that a client can use to enable their users to have
-their wallet within there application and do on-chain transactions within their app
+This SDK is an easy-to-use wallet service that a client can use to enable their users to have
+their wallet within their application and do on-chain transactions within their app.
 
 ## 💡 Features 
 
