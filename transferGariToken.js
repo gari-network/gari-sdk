@@ -5,12 +5,11 @@ const { getDecodedTransction, partialSign } = require('./gariHelper')
 
 /**
  * 
- * @param {string} token - jwt token for user information
- * @param {string} receiverPublicKey - receiver publickey for transaction
- * @param {string} coins - amount to be transfer(in lamports)
+ * @param {string} jwtToken - jwt token for user information
+ * @param {string} transactionData - receiver publickey and tokenToTransfer and tokenAmount  
  * @returns 
  */
-async function transferGariToken(token, receiverPublicKey, coins) {
+async function transferGariToken(transactionData, jwtToken) {
     try {
         const validate = sdkValidate()
         if (!validate) {
@@ -18,23 +17,16 @@ async function transferGariToken(token, receiverPublicKey, coins) {
         }
 
         // web3auth initialize function call for getting privateKey of sender
-        const againInitializeWeb3 = await initialize(token);
+        const againInitializeWeb3 = await initialize(jwtToken);
         const { privateKey } = againInitializeWeb3;
 
-        const transactionData = {
-            receiverPublicKey,
-            amount: coins
-        }
-
-        // encodedTransaction : it contains all transactions instructions(i.e sender/receiver tokenAssociatedAccount, feepayer(chingari), add recentblockhash obj)
-        const encodedTransactionDetails = await getEncodeTransaction(transactionData, token)
+        const encodedTransactionDetails = await getEncodeTransaction(transactionData, jwtToken)
         
         // encodedTransactionDetails is in toString("base64") format, to decode data : 
         const transactionDetailsWithoutSignatures = getDecodedTransction(encodedTransactionDetails.data.data);
 
         // partial sign from sender wallet  
         const userPartialSign = partialSign(transactionDetailsWithoutSignatures, privateKey)
-        console.log('userPartialSign', userPartialSign)
         return { encodedTransaction: userPartialSign };
 
     } catch (error) {

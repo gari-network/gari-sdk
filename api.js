@@ -3,14 +3,14 @@ const envConfig = require('./config.js')
 
 /**
  * 
- * @param {String} token - jwt token for user information
+ * @param {String} jwtToken - jwt token for user information
  * @returns 
  */
-function getWalletDetails(token) {
+function getWalletDetails(jwtToken) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
     return axios.get(`${GARI_URL}/appwallet/get-wallet-details`, {
         headers: {
-            token,
+            jwtToken,
             gariClientId
         }
     })
@@ -19,14 +19,14 @@ function getWalletDetails(token) {
 /**
  * 
  * @param {string} publicKey - publickey of user to create wallet
- * @param {string} token - jwt token for user information
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-function createWallet(publicKey, token) {
+function createWallet(publicKey, jwtToken) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
     return axios.post(`${GARI_URL}/appwallet/new-user-wallet`, { publicKey }, {
         headers: {
-            token,
+            jwtToken,
             gariClientId
         }
     })
@@ -34,15 +34,15 @@ function createWallet(publicKey, token) {
 
 /**
  * 
- * @param {object} transactionData - it has receiver publickey and amount 
- * @param {string} token - jwt token for user information
+ * @param {object} transactionData - it has receiverpublickey and amountToTransfer & tokenToTransfer 
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-function getEncodeTransaction(transactionData, token) {
+function getEncodeTransaction(transactionData, jwtToken) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
     return axios.post(`${GARI_URL}/appwallet/get-encode-transaction`, transactionData, {
         headers: {
-            token,
+            jwtToken,
             gariClientId
         }
     })
@@ -51,16 +51,16 @@ function getEncodeTransaction(transactionData, token) {
 /**
  * 
  * @param {string} encodedTransaction - encodedTransaction is base64 string of transaction Details.
- * @param {string} token - jwt token for user information
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-function startTransactions(encodedTransaction, token) {
+function startTransactions(encodedTransaction, transactionData, jwtToken) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
 
     // todo: dont pass secerate key, hash body with secerate and backend will try to decrypti with secerate key
-    return axios.post(`${GARI_URL}/appwallet/initiate-transaction`, { encodedTransaction }, {
+    return axios.post(`${GARI_URL}/appwallet/initiate-transaction`, { encodedTransaction, ...transactionData }, {
         headers: {
-            token,
+            jwtToken,
             gariClientId,
         }
     })
@@ -69,15 +69,14 @@ function startTransactions(encodedTransaction, token) {
 /**
  * 
  * @param {object} airdropData 
- * @param {string} token 
+ * @param {string} jwtToken 
  * @returns 
  */
-function getEncodeTransactionAirdrop(airdropData, token) {
+function getEncodeTransactionAirdrop(airdropData, jwtToken) {
     const { GARI_URL, secretKey } = envConfig.getConfig();
-    // get encoded transaction instructions
     return axios.post(`${GARI_URL}/admin/get-encode-transaction-airdrop`, airdropData, {
         headers: {
-            token,
+            jwtToken,
             secretKey
         },
     });
@@ -85,15 +84,16 @@ function getEncodeTransactionAirdrop(airdropData, token) {
 
 /**
  * 
- * @param {string} data - data has publickey and balance 
- * @param {string} token - jwt token for user information
+ * @param {string} airdropData - data has publickeys and tokenToTransfer and tokenAmount 
+ * @param {string} jwtToken - jwt token for user information
+ * @param {encodedTransaction} encodedTransaction - transaction info encoded into string('base64')
  * @returns 
  */
-function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
+function getAirdrop(airdropData, encodedTransaction, jwtToken) {
     const { GARI_URL, secretKey } = envConfig.getConfig()
-    return axios.post(`${GARI_URL}/admin/airdrop`, { publicKey, airdropAmount, encodedTransaction }, {
+    return axios.post(`${GARI_URL}/admin/airdrop`, { ...airdropData, encodedTransaction }, {
         headers: {
-            token,
+            jwtToken,
             secretKey
         }
     })
@@ -102,14 +102,14 @@ function getAirdrop(publicKey, airdropAmount, encodedTransaction, token) {
 /**
  * 
  * @param {string} transactionId - transaction id created while saving transaction.
- * @param {string} token - jwt token for user information
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-function getTransactionByid(transactionId, token) {
+function getTransactionByid(transactionId, jwtToken) {
     const { GARI_URL, gariClientId } = envConfig.getConfig()
     return axios.get(`${GARI_URL}/appwallet/get-transaction-by-id${transactionId}`, {
         headers: {
-            token,
+            jwtToken,
             gariClientId
         }
     })
@@ -118,14 +118,14 @@ function getTransactionByid(transactionId, token) {
 /**
  * 
  * @param {object} data - it has pagination data
- * @param {string} token - jwt token for user information
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-function getTransaction(data, token) {
+function getTransaction(data, jwtToken) {
     const { GARI_URL, secretKey } = envConfig.getConfig()
     return axios.post(`${GARI_URL}/admin/transactions`, data, {
         headers: {
-            token,
+            jwtToken,
             secretKey
         }
     })

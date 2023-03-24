@@ -4,38 +4,33 @@ const { getDecodedTransction, partialSign, } = require('./gariHelper')
 
 /**
  * 
- * @param {string} publicKey - user publickey which we will give airdrop rewards 
- * @param {string} airdropAmount - amount of airdrop reward to user
- * @param {string} token - jwt token for user information
- * @param {string} fromWalletPrivateKey - private key of app 
+ * @param {airdropData} airdropData - contains publickeys and tokenAmount and tokenToTransfer
+ * @param {string} senderWalletPrivateKey - for partial signing on transaction 
+ * @param {string} feepayerWalletPrivateKey - wallet for paying fee for airdrop transaction 
+ * @param {string} jwtToken - jwt token for user information
  * @returns 
  */
-async function airDrop(publicKey, airdropAmount, token, fromWalletPrivateKey) {
+async function airDrop(airdropData, senderWalletPrivateKey, feepayerWalletPrivateKey, jwtToken) {
     try {
         const validate = sdkValidate(`backend`)
         if (!validate) {
             throw new Error(`sdk not initialized`)
         }
 
-        const airDropdata = {
-            publicKey, airdropAmount
-        }
-
         // first get encoded transaction details in toString('base64)
         const encodeTransactionInstruction = await getEncodeTransactionAirdrop(
-            airDropdata,
-            token
+            airdropData,
+            jwtToken
         );
 
-        // decode transaction data :
         const transactionDetailsWithoutSignatures = getDecodedTransction(
             encodeTransactionInstruction.data.data
         );
 
-        // gari clients partial sign 
-        const partialSignedTransaction = await partialSign(transactionDetailsWithoutSignatures, fromWalletPrivateKey)
+        // sign transaction 
+        const completeSignedTransaction = await partialSign(transactionDetailsWithoutSignatures, senderWalletPrivateKey, feepayerWalletPrivateKey);
 
-        const airdropResponse = await getAirdrop(publicKey, airdropAmount, partialSignedTransaction, token);
+        const airdropResponse = await getAirdrop(airdropData, completeSignedTransaction, jwtToken);
         return airdropResponse.data.data;
     } catch (error) {
         console.log('getting error while airDrop', error)

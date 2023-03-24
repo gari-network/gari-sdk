@@ -7,7 +7,7 @@ const envConfig = require('./config.js')
 function sdkInitialize(configDetails) {
     envConfig.setConfig(configDetails);
     const configData = envConfig.getConfig()
-    console.log('configData', configData)
+    console.log('configData on initializing sdk ', configData)
 }
 
 function sdkValidate(type) {

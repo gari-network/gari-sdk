@@ -46,7 +46,7 @@ async function initialize(token) {
                     },
                 },
                 whiteLabel: {
-                    name: "Circle-Of-Games",
+                    name: "ludoking",
                     logoLight : "https://as2.ftcdn.net/v2/jpg/04/26/52/83/1000_F_426528320_wRec6AsJNDTuT6AmwYspF6C7eqYZLC17.jpg",
                     logoDark : "https://as2.ftcdn.net/v2/jpg/04/26/52/83/1000_F_426528320_wRec6AsJNDTuT6AmwYspF6C7eqYZLC17.jpg",
                     defaultLanguage: "en",
