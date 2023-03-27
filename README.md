@@ -42,7 +42,7 @@ gari.sdkInitialize(clientId)
 ```
 
 ### createWallet Or GetWallet
-Get wallet or create wallet for user.
+Get a wallet or create a wallet for the user.
 
 Token format supported:
 [here](https://web3auth.io/docs/custom-authentication/byo-jwt-providers)
