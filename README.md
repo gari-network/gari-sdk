@@ -1,6 +1,6 @@
 # gari-sdk
-This SDK is easy-to-use wallet service that a client can use to enable their users to have
-their wallet within there application and do on-chain transactions within their app
+This SDK is an easy-to-use wallet service that a client can use to enable their users to have
+their wallet within their application and do on-chain transactions within their app
 
 ## 💡 Features 
 
@@ -8,7 +8,7 @@ their wallet within there application and do on-chain transactions within their 
 - fetch their wallet details and balance for a particular user
 - Send gari tokens from one wallet to another
 - fetch their transaction details by txn id
-- Client can Airdrop gari tokens to its users
+- The Client can Airdrop gari tokens to its users
 
 ## ⚡ Quick Start
 
@@ -47,7 +47,7 @@ Get a wallet or create a wallet for the user.
 Token format supported:
 [here](https://web3auth.io/docs/custom-authentication/byo-jwt-providers)
 
-Note: web3 auth popup will occur initialize for user during wallet creation, next time this function will directly return data
+Note: web3 auth popup will occur initially for the user during wallet creation, next time this function will directly return data
 
 ```js
 /**
@@ -62,7 +62,7 @@ balance:0
 ```
 
 ### transferGariToken
-Send a gari token to another user. This will return an encoded transaction which the client has to send to its backend for validation and its backend will forward it to chingari for processing.
+Send a gari token to another user. This will return an encoded transaction that the client has to send to its backend for validation and will forward it to chingari for processing.
 
 ```js
 /**
@@ -84,7 +84,7 @@ transaction:’base64 Encoded Transaction’
 ### Initialize gari library
 ```js
 /**
- * @description if using in backend, need to pass gariSecretKey
+ * @description if using in the backend, need to pass gariSecretKey
  * @param {string} clientId 
  * @param {string?} secerateKey 
  */
@@ -92,7 +92,7 @@ gari.sdkInitialize(clientId,secerateKey)
 ```
 
 ### airdrop
-client will airdrop gari tokens to its users as a reward. 
+the client will airdrop gari tokens to its users as a reward. 
 ```js
 /**
  * @param {string} publicKey 
@@ -129,7 +129,7 @@ siganature:'EJ3FktdZhsNbDMamvSygi2wLfjBgisWzF1iNecdckQVmsdgEJ3FktdZhsNbDMamvSygi
 ```
 
 ### getTransactions
-this will give all client related transactions to sdk Client. 
+this will give all client-related transactions to sdk Client. 
 
 ```js
 /**
@@ -162,7 +162,7 @@ date:Date
 ```
 
 ### getTransactionById
-this will return a specific transaction by particular id.
+this will return a specific transaction by a particular id.
 
 
 ```js
@@ -185,5 +185,5 @@ date:Date
 ```
 
 ## 🌐 Demo
-Checkout the [gari Demo](https://demo-gari-sdk.vercel.app/) to see how gari can be used in your application.
+Check out the [gari Demo](https://demo-gari-sdk.vercel.app/) to see how gari can be used in your application.
 Demo [Source code](https://github.com/gari-network/demo-gari-sdk)
