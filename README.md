@@ -47,7 +47,7 @@ Get a wallet or create a wallet for the user.
 Token format supported:
 [here](https://web3auth.io/docs/custom-authentication/byo-jwt-providers)
 
-Note: web3 auth popup will occur initiale for user during wallet creation, next time this function will directly return data
+Note: web3 auth popup will occur initialize for user during wallet creation, next time this function will directly return data
 
 ```js
 /**
@@ -62,7 +62,7 @@ balance:0
 ```
 
 ### transferGariToken
-Send gari token to another user. This will return encoded transaction which client has to send to its backend for validation and its backend will forward it to chingari for processing.
+Send a gari token to another user. This will return an encoded transaction which the client has to send to its backend for validation and its backend will forward it to chingari for processing.
 
 ```js
 /**
@@ -75,7 +75,7 @@ gari.transferGariToken(token,toPublicKey, amount)
 
 return
 {
-transaction:’base64 Encoded Tranaction’
+transaction:’base64 Encoded Transaction’
 }
 ```
 
@@ -113,7 +113,7 @@ message:’’
 ```
 
 ### initiateTransaction 
-This method will validate transaction details and return signature.
+This method will validate transaction details and return signatures.
 
 ```js
 /**
@@ -162,7 +162,7 @@ date:Date
 ```
 
 ### getTransactionById
-this will return specific transaction by particular id.
+this will return a specific transaction by particular id.
 
 
 ```js
