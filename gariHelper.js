@@ -1,5 +1,7 @@
 
 const web3 = require('@solana/web3.js')
+const { findThisPublicKey, } = require('./api.js')
+const { sdkValidate } = require('./sdkInitialize.js')
 
 /**
  * 
@@ -37,5 +39,28 @@ function partialSign(transactionDetails, privateKey, feepayerWalletPrivateKey=un
     return wireTransaction.toString('base64');
 }
 
-module.exports = { partialSign, getDecodedTransction }
+/**
+ * 
+ * @param {string} publickey - publickey of the user which we need to verify  
+ * @returns 
+ */
+async function verifyPublicKey(publicKey, jwtToken) {
+    try {
+        const validate = sdkValidate()
+        if (!validate) {
+            throw new Error(`sdk not initialized`)
+        }
+
+        let receiverPublicKey;
+        const {data} = await findThisPublicKey(publicKey, jwtToken);
+        if(data.data && data.data.publicKey) {
+            receiverPublicKey =  data.data.publicKey;
+        }
+        return receiverPublicKey;
+    } catch (error) {
+        console.log('error in verify publickey function', error);
+    }
+}
+
+module.exports = { partialSign, getDecodedTransction, verifyPublicKey }
 

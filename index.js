@@ -3,10 +3,13 @@ const getTransactions = require('./getTransactions.js')
 const createWalletOrGetWallet = require('./getWalletDetails.js')
 const airDrop = require('./getAirdrop.js')
 const initiateTransaction = require('./startTransaction.js')
+const initiateTransactionExternal = require('./startTransactionExternal.js')
 const transferGariToken = require('./transferGariToken.js')
+const transferGariTokenExternal = require('gari/transferTokenExternal.js')
 const { sdkInitialize } = require('./sdkInitialize.js')
 const { getDecodedTransction } = require('./gariHelper.js') 
 const {partialSign} = require('./gariHelper.js')
+const {verifyPublicKey} = require('./gariHelper.js')
 
 const {packageVersion} = require('./config.js')
 
@@ -16,14 +19,17 @@ module.exports = {
     packageVersion,
     getDecodedTransction,
     partialSign,
+    verifyPublicKey,
 
     // backend methods
     airDrop,
     initiateTransaction,
+    initiateTransactionExternal,
     getTransactionsByID,
     getTransactions,
 
     // frontend methods
     createWalletOrGetWallet,
     transferGariToken,
+    transferGariTokenExternal
 }

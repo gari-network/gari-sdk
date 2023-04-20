@@ -18,6 +18,23 @@ function getWalletDetails(jwtToken) {
 
 /**
  * 
+ * @param {String} publicKey - publickey of the user
+ * @param {String} jwtToken - jwt token for user information
+ * @returns 
+ */
+function findThisPublicKey(publicKey, jwtToken) {
+    const { GARI_URL, gariClientId } = envConfig.getConfig()
+    return axios.post(`${GARI_URL}/appwallet/is-my-user`, {}, {
+        headers: {
+            publicKey,
+            jwtToken,
+            gariClientId
+        }
+    })
+}
+
+/**
+ * 
  * @param {string} publicKey - publickey of user to create wallet
  * @param {string} jwtToken - jwt token for user information
  * @returns 
@@ -59,6 +76,40 @@ function startTransactions(encodedTransaction, transactionData, jwtToken) {
 
     // todo: dont pass secerate key, hash body with secerate and backend will try to decrypti with secerate key
     return axios.post(`${GARI_URL}/appwallet/initiate-transaction`, { encodedTransaction, ...transactionData }, {
+        headers: {
+            jwtToken,
+            gariClientId,
+        }
+    })
+}
+
+/**
+ * 
+ * @param {object} transactionData - it has receiverpublickey and amountToTransfer & tokenToTransfer 
+ * @param {string} jwtToken - jwt token for user information
+ * @returns 
+ */
+function getEncodeTransactionExternal(transactionData, jwtToken) {
+    const { GARI_URL, gariClientId } = envConfig.getConfig()
+    return axios.post(`${GARI_URL}/appwallet/get-encode-transaction-external`, transactionData, {
+        headers: {
+            jwtToken,
+            gariClientId
+        }
+    })
+}
+
+/**
+ * 
+ * @param {string} encodedTransaction - encodedTransaction is base64 string of transaction Details.
+ * @param {string} jwtToken - jwt token for user information
+ * @returns 
+ */
+function startTransactionsExternal(encodedTransaction, transactionData, jwtToken) {
+    const { GARI_URL, gariClientId } = envConfig.getConfig()
+
+    // todo: dont pass secrete key, hash body with secerate and backend will try to decrypti with secerate key
+    return axios.post(`${GARI_URL}/appwallet/initiate-transaction-external`, { encodedTransaction, ...transactionData }, {
         headers: {
             jwtToken,
             gariClientId,
@@ -133,4 +184,4 @@ function getTransaction(data, jwtToken) {
 
 
 
-module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodeTransaction, getEncodeTransactionAirdrop }
+module.exports = { getTransaction, getTransactionByid, getWalletDetails, createWallet, getAirdrop, startTransactions, getEncodeTransaction, getEncodeTransactionAirdrop, getEncodeTransactionExternal, startTransactionsExternal, findThisPublicKey }
