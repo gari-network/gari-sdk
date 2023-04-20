@@ -23,8 +23,10 @@ function getDecodedTransction(encodedTransction) {
 function partialSign(transactionDetails, privateKey, feepayerWalletPrivateKey=undefined) {
 
     // hex is used bcoz web3auth provides privatekey in hex format
-    let signerWallet = web3.Keypair.fromSecretKey(Buffer.from(privateKey, "hex"));
-    transactionDetails.partialSign(...[signerWallet]);
+    if(privateKey) {
+        let signerWallet = web3.Keypair.fromSecretKey(Buffer.from(privateKey, "hex"));
+        transactionDetails.partialSign(...[signerWallet]);
+    }
 
     if(feepayerWalletPrivateKey) {
         let feepayerWallet = web3.Keypair.fromSecretKey(Buffer.from(feepayerWalletPrivateKey, "hex"));
