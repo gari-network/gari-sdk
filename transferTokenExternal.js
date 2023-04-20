@@ -1,7 +1,7 @@
-const { getEncodeTransactionExternal } = require('gari/api.js')
+const { getEncodeTransactionExternal } = require('./api.js')
 const initialize = require('gari/helper.js')
 const { sdkValidate } = require('gari/sdkInitialize.js')
-const { getDecodedTransction, partialSign } = require('gari/gariHelper.js')
+const { getDecodedTransction, partialSign } = require('./gariHelper.js')
 
 /**
  * 
